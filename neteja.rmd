@@ -1,0 +1,57 @@
+---
+title: "VD-PRAC1-football"
+author: "eplanelluoc"
+date: "2023-12-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Carreguem  les dades fem petit exàmen i eliminem 
+```{r}
+# Carrega del conjunt de dades
+results <- read.csv("results.csv")
+
+# Revisem la estructura
+structure = str(results)
+```
+
+```{r}
+summary(results)  # Mostra un resum estadístic, identificant valors perduts
+```
+
+
+Si cal i te sentit en la visualització, omplim valors perduts amb la mitjana, exemple fet amb la variable age, es pot fer amb qualsevol númerica.
+```{r}
+# Mostrar la quantitat de valors NA per a cada variable
+colSums(is.na(results))
+
+```
+
+Si cal, neteja de valors buits
+```{r}
+# Identificació i tractament de valors buits
+results <- na.omit(results)
+
+results
+
+```
+
+```{r}
+# Factorització de les columnes que creguem necessaries
+# Exemple: Factoritzar variables no numeriques
+
+results$home_team <- factor(results$home_team)
+results$away_team <- factor(results$away_team)
+results$tournament <- factor(results$tournament)
+results$city <- factor(results$city)
+results$country <- factor(results$country)
+results$neutral <- factor(results$neutral)
+
+summary(results) 
+str(results)
+head(results)
+
+```
